@@ -1,20 +1,34 @@
 import React, { useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { connect } from "react-redux";
+import axios from 'axios'
 
-const CreateEvents = () => {
+const CreateEvents = (props) => {
   const [startDate, setStartDate] = useState(new Date());
+  const [Title, setTitle] = useState("Default");
   const [participants, setParticipants] = useState("");
-  let submitHandler = () => {
+  const [req, setReq] = useState({})
+  const submitHandler = () => {
     console.log(startDate);
-    console.log(typeof participants);
     let participantsArray = participants
       .slice(0, participants.length)
       .split(",");
-    const req = {
-      Date: startDate,
-      Participants: participantsArray,
-    };
+    // const requ = {
+    //   title: Title,
+    //   date: startDate,
+    //   participants: participantsArray,
+    //   owner: props.email
+    // };
+    setReq({
+      title: Title,
+      date: startDate,
+      participants: participantsArray,
+      owner: props.email
+    });
+    axios.post("http://localhost:3000/api/createmeet", req).then((res) => {
+      console.log(res.data);
+    })
     console.log(req);
   };
 
@@ -41,11 +55,17 @@ const CreateEvents = () => {
           value={participants}
         ></textarea>
       </div>
-      <div className="btn submit" onClick={(e) => submitHandler()}>
+      <button className="btn submit" onClick={() => submitHandler()}>
         Submit
-      </div>
+      </button>
     </div>
   );
 };
+ 
+const mapStateToProps = (state) => {
+  return {
+    email: state.email
+  }
+}
 
-export default CreateEvents;
+export default connect(mapStateToProps, undefined)(CreateEvents);

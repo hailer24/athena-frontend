@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import CreateEvents from "./components/CreateEvents/CreateEvents";
+import Meetings from "./components/Meetings/Meetings";
+import Nav from "./components/Navbar";
+import NewMeet from "./components/NewEvents/NewMeet";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="nav">
+        <Nav></Nav>
+      </div>
+      <section className="content">
+        <div className="meeting">
+          <h1>Invitations</h1>
+          <Meetings></Meetings>
+        </div>
+        <div className="newMeet">
+          <h1>New Meetings</h1>
+          <CreateEvents />
+        </div>
+      </section>
+      <footer>hi</footer>
     </div>
   );
 }

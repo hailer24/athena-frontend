@@ -1,0 +1,17 @@
+.meetItem {
+  border-bottom: solid 1px black;
+}
+
+.meetItem .title {
+  font-size: 1.8rem;
+}
+
+.meetItem .time {
+  display: flex;
+  align-items: flex-end;
+}
+
+.titleCard {
+  display: flex;
+  justify-content: space-between;
+}
